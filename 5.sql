@@ -34,11 +34,13 @@ JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
 
 5. -- Вывести сумму, на которую было отправлено товаров клиентам в Germany --
 
-SELECT SUM(Products.Price * OrderDetails.Quantity) AS total_price_sent_to_Germany 
-FROM Orders
-JOIN Customers ON Orders.CustomerID = Customers.CustomerID
-JOIN OrderDetails ON Orders.OrderID = OrderDetails.OrderID
+SELECT 
+	SUM(OrderDetails.Quantity * Products.Price) AS Sales_to_Germany
+FROM OrderDetails
+	
+JOIN Orders ON OrderDetails.OrderID = Orders.OrderID
 JOIN Products ON OrderDetails.ProductID = Products.ProductID
-WHERE Customers.Country = 'Germany'
+JOIN Customers ON Orders.CustomerID = Customers.CustomerID
 
-
+WHERE
+	 Customers.Country = 'Germany'
