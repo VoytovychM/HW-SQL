@@ -20,7 +20,7 @@ WHERE
 
 3. -- Вывести общую сумму проданных товаров --
    
-SELECT SUM (Products.Price) AS total_sold_products 
+SELECT SUM (Products.Price * OrderDetails.Quantity) AS total_sold_products 
 FROM OrderDetails
 JOIN Products ON OrderDetails.ProductID = Products.ProductID
 
