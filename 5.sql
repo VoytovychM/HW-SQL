@@ -20,7 +20,7 @@ WHERE
 
 3. -- Вывести общую сумму проданных товаров --
    
-SELECT COUNT(Products.Price) AS total_sold_products 
+SELECT SUM (Products.Price) AS total_sold_products 
 FROM OrderDetails
 JOIN Products ON OrderDetails.ProductID = Products.ProductID
 
@@ -34,7 +34,7 @@ JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
 
 5. -- Вывести сумму, на которую было отправлено товаров клиентам в Germany --
 
-SELECT SUM(Products.Price) AS total_price_sent_to_Germany 
+SELECT SUM(Products.Price * OrderDetails.Quantity) AS total_price_sent_to_Germany 
 FROM Orders
 JOIN Customers ON Orders.CustomerID = Customers.CustomerID
 JOIN OrderDetails ON Orders.OrderID = OrderDetails.OrderID
