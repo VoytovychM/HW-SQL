@@ -31,4 +31,9 @@ JOIN Products ON OrderDetails.ProductID = Products.ProductID
 GROUP BY OrderDetails.OrderID
 
 --6. Вывести доход каждого менеджера за весь период, исходя из ставки в 5% от суммы его заказов (проекция: фамилия_менеджера, доход)--
-
+SELECT Employees.LastName, SUM(OrderDetails.Quantity * Products.Price) * .05 AS employee_income
+FROM OrderDetails
+JOIN Orders ON OrderDetails.OrderID = Orders.OrderID
+JOIN Products ON OrderDetails.ProductID = Products.ProductID
+JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID
